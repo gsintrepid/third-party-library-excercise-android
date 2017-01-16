@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View, DownloadCatImageTask.Callback {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     @BindView(R.id.image_view)
     ImageView imageView;
@@ -69,15 +71,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void loadImageFromUrl(String url) {
-        DownloadCatImageTask downloadCatImageTask = new DownloadCatImageTask();
-        downloadCatImageTask.setCallback(this);
-        downloadCatImageTask.execute(url);
-    }
+        Picasso.with(this)
+                .load(url)
+                .into(imageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        dismissLoadingIndicator();
+                    }
 
-    @Override
-    public void onImageResult(Bitmap bitmap) {
-        dismissLoadingIndicator();
-        imageView.setImageBitmap(bitmap);
+                    @Override
+                    public void onError() {
+                        dismissLoadingIndicator();
+                    }
+                });
     }
 
     @Override
