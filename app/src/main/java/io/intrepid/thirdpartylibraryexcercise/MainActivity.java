@@ -9,9 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements MainContract.View, DownloadCatImageTask.Callback {
 
+    @BindView(R.id.image_view)
     ImageView imageView;
+
+    @BindView(R.id.new_cat_button)
     Button getNewCatButton;
 
     private MainPresenter presenter;
@@ -21,11 +27,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+
         presenter = new MainPresenter();
         presenter.bindView(this);
 
-        imageView = (ImageView) findViewById(R.id.image_view);
-        getNewCatButton = (Button) findViewById(R.id.new_cat_button);
         getNewCatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
