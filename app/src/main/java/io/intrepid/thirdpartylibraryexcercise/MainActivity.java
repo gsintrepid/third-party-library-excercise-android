@@ -73,17 +73,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void loadImageFromUrl(String url) {
         Picasso.with(this)
                 .load(url)
-                .into(imageView, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        dismissLoadingIndicator();
-                    }
+                .into(imageView);
 
-                    @Override
-                    public void onError() {
-                        dismissLoadingIndicator();
-                    }
-                });
+        // Dismiss loading indicator right away (does not wait for Picasso callback)
+        dismissLoadingIndicator();
     }
 
     @Override
