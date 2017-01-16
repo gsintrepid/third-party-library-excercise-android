@@ -1,11 +1,9 @@
 package io.intrepid.thirdpartylibraryexcercise;
 
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -13,12 +11,12 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     @BindView(R.id.image_view)
     ImageView imageView;
-
     @BindView(R.id.new_cat_button)
     Button getNewCatButton;
 
@@ -34,13 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         presenter = new MainPresenter();
         presenter.bindView(this);
-
-        getNewCatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onNewCatButtonClick();
-            }
-        });
     }
 
     @Override
@@ -49,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         presenter.bindView(this);
     }
 
+    @OnClick(R.id.new_cat_button)
     public void onNewCatButtonClick() {
         presenter.onNewCatButtonClick();
     }
