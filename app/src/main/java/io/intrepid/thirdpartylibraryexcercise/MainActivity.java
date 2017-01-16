@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -17,8 +16,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @BindView(R.id.image_view)
     ImageView imageView;
-    @BindView(R.id.new_cat_button)
-    Button getNewCatButton;
 
     private MainPresenter presenter;
     private ProgressDialog dialog;
